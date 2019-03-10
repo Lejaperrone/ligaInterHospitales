@@ -1,17 +1,14 @@
 package com.torneos.LigaInterHospitales.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Jugador")
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 public class Jugador implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +20,13 @@ public class Jugador implements Serializable
     private String apellido;
 
     private int documento;
+
+    @ManyToOne
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
+
+    @OneToMany(mappedBy = "jugador")
+    private List<JugadorPorPartido> jugadorPorPartidos;
 
     public Long getId() {
         return id;
@@ -54,5 +58,21 @@ public class Jugador implements Serializable
 
     public void setDocumento(int documento) {
         this.documento = documento;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public List<JugadorPorPartido> getJugadorPorPartidos() {
+        return jugadorPorPartidos;
+    }
+
+    public void setJugadorPorPartidos(List<JugadorPorPartido> jugadorPorPartidos) {
+        this.jugadorPorPartidos = jugadorPorPartidos;
     }
 }

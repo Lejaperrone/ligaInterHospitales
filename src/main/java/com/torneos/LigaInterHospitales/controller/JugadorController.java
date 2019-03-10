@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class JugadorController {
 
+    private JugadorRepository jugadorRepository;
+
     @Autowired
-    JugadorRepository jugadorRepository;
+    public JugadorController(JugadorRepository jugadorRepository) {
+        this.jugadorRepository = jugadorRepository;
+    }
 
     @GetMapping("/jugadores")
     public List<Jugador> getAllJugadores() {
@@ -25,5 +29,4 @@ public class JugadorController {
     public Jugador crearJugador(@Valid @RequestBody Jugador jugador) {
         return jugadorRepository.save(jugador);
     }
-
 }
