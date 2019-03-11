@@ -9,6 +9,18 @@ import java.util.List;
 @Table(name = "Jugador")
 public class Jugador implements Serializable
 {
+
+    public Jugador() {
+    }
+
+    public Jugador(@NotBlank String nombre, @NotBlank String apellido, int documento, Equipo equipo, List<JugadorPorPartido> jugadorPorPartidos) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.equipo = equipo;
+        this.jugadorPorPartidos = jugadorPorPartidos;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

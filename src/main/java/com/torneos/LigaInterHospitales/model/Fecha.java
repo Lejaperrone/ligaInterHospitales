@@ -9,6 +9,16 @@ import java.util.List;
 @Table(name = "Fecha")
 public class Fecha implements Serializable {
 
+    public Fecha(){
+
+    }
+
+    public Fecha(@NotBlank String nombre, Zona zona, List<Partido> partidos) {
+        this.nombre = nombre;
+        this.zona = zona;
+        this.partidos = partidos;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

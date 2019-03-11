@@ -7,6 +7,20 @@ import java.io.Serializable;
 @Table(name = "JugadorPorPartido")
 public class JugadorPorPartido implements Serializable {
 
+    public JugadorPorPartido(){
+
+    }
+
+    public JugadorPorPartido(Jugador jugador, Partido partido, int nroCamiseta, int nroGoles, boolean amarilla, boolean roja, boolean figura) {
+        this.jugador = jugador;
+        this.partido = partido;
+        this.nroCamiseta = nroCamiseta;
+        this.nroGoles = nroGoles;
+        this.amarilla = amarilla;
+        this.roja = roja;
+        this.figura = figura;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -8,6 +8,18 @@ import java.util.List;
 @Table(name = "Partido")
 public class Partido implements Serializable {
 
+    public Partido(){
+    }
+
+    public Partido(List<JugadorPorPartido> jugadorPorPartidos, Equipo local, Equipo visitante, Fecha fecha, int golesLocal, int golesVisita) {
+        this.jugadorPorPartidos = jugadorPorPartidos;
+        this.local = local;
+        this.visitante = visitante;
+        this.fecha = fecha;
+        this.golesLocal = golesLocal;
+        this.golesVisita = golesVisita;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

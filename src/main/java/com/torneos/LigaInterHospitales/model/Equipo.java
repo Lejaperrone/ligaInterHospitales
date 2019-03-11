@@ -9,6 +9,17 @@ import java.util.List;
 @Table(name = "Equipo")
 public class Equipo implements Serializable {
 
+    public Equipo() {
+    }
+
+    public Equipo(@NotBlank String nombre, List<Jugador> jugadores, Zona zona, List<Partido> partidosLocales, List<Partido> partidosVisitantes) {
+        this.nombre = nombre;
+        this.jugadores = jugadores;
+        this.zona = zona;
+        this.partidosLocales = partidosLocales;
+        this.partidosVisitantes = partidosVisitantes;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
