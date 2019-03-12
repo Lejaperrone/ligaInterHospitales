@@ -4,6 +4,7 @@ import com.torneos.LigaInterHospitales.dto.JugadorDto;
 import com.torneos.LigaInterHospitales.exception.ResourceNotFoundException;
 import com.torneos.LigaInterHospitales.model.Equipo;
 import com.torneos.LigaInterHospitales.model.Jugador;
+import com.torneos.LigaInterHospitales.repository.EquipoRepository;
 import com.torneos.LigaInterHospitales.repository.JugadorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +21,33 @@ public class JugadorController {
 
     private JugadorRepository jugadorRepository;
     private ModelMapper modelMapper;
+    private EquipoRepository equipoRepository;
 
     @Autowired
-    public JugadorController(JugadorRepository jugadorRepository, ModelMapper modelMapper) {
+    public JugadorController(JugadorRepository jugadorRepository, ModelMapper modelMapper, EquipoRepository equipoRepository) {
         this.jugadorRepository = jugadorRepository;
         this.modelMapper = modelMapper;
+        this.equipoRepository = equipoRepository;
     }
 
     @GetMapping("/jugadores")
     public List<JugadorDto> getAllJugadores() {
+
         return jugadorRepository.findAll().stream().map(jugador -> modelMapper.map(jugador, JugadorDto.class)).collect(Collectors.toList());
     }
 
     @GetMapping("/jugador/{id}")
-    public JugadorDto getJugadorById(@PathVariable(value = "id") Long id)
-    {
+    public JugadorDto getJugadorById(@PathVariable(value = "id") Long id) {
         Jugador jugador = jugadorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Jugador", "Id", id));
 
         return modelMapper.map(jugador, JugadorDto.class);
+    }
+
+    @GetMapping("/jugadores/{idEquipo}")
+    public List<JugadorDto> getJugadoresByEquipo(@PathVariable(value = "idEquipo" ) Long id) {
+        Equipo equipo = equipoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Equipo", "Id", id));
+        List<Jugador> jugadores = jugadorRepository.findAllByEquipo(equipo);
+        return jugadores.stream().map(jugador -> modelMapper.map(jugador, JugadorDto.class)).collect(Collectors.toList());
     }
 
     @PostMapping("/jugador")
