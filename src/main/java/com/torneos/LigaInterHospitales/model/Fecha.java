@@ -13,10 +13,9 @@ public class Fecha implements Serializable {
 
     }
 
-    public Fecha(@NotBlank String nombre, Zona zona, List<Partido> partidos) {
+    public Fecha(@NotBlank String nombre, Zona zona) {
         this.nombre = nombre;
         this.zona = zona;
-        this.partidos = partidos;
     }
 
     @Id
@@ -29,9 +28,6 @@ public class Fecha implements Serializable {
     @ManyToOne
     @JoinColumn(name = "zona_id")
     private Zona zona;
-
-    @OneToMany(mappedBy = "fecha")
-    private List<Partido> partidos;
 
     public Long getId() {
         return id;
@@ -55,13 +51,5 @@ public class Fecha implements Serializable {
 
     public void setZona(Zona zona) {
         this.zona = zona;
-    }
-
-    public List<Partido> getPartidos() {
-        return partidos;
-    }
-
-    public void setPartidos(List<Partido> partidos) {
-        this.partidos = partidos;
     }
 }

@@ -1,39 +1,18 @@
-package com.torneos.LigaInterHospitales.model;
+package com.torneos.LigaInterHospitales.dto;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "Jugador")
-public class Jugador implements Serializable
+public class JugadorDto implements Serializable
 {
-
-    public Jugador() {
-    }
-
-    public Jugador(@NotBlank String nombre, @NotBlank String apellido, int documento, Equipo equipo) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.documento = documento;
-        this.equipo = equipo;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String nombre;
 
-    @NotBlank
     private String apellido;
 
     private int documento;
 
-    @ManyToOne
-    @JoinColumn(name = "equipo_id")
-    private Equipo equipo;
+    private EquipoDto equipo;
 
     public Long getId() {
         return id;
@@ -67,11 +46,11 @@ public class Jugador implements Serializable
         this.documento = documento;
     }
 
-    public Equipo getEquipo() {
+    public EquipoDto getEquipo() {
         return equipo;
     }
 
-    public void setEquipo(Equipo equipo) {
+    public void setEquipo(EquipoDto equipo) {
         this.equipo = equipo;
     }
 }

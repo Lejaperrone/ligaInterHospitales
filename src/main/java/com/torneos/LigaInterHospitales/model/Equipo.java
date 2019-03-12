@@ -3,7 +3,6 @@ package com.torneos.LigaInterHospitales.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "Equipo")
@@ -12,12 +11,9 @@ public class Equipo implements Serializable {
     public Equipo() {
     }
 
-    public Equipo(@NotBlank String nombre, List<Jugador> jugadores, Zona zona, List<Partido> partidosLocales, List<Partido> partidosVisitantes) {
+    public Equipo(@NotBlank String nombre, Zona zona) {
         this.nombre = nombre;
-        this.jugadores = jugadores;
         this.zona = zona;
-        this.partidosLocales = partidosLocales;
-        this.partidosVisitantes = partidosVisitantes;
     }
 
     @Id
@@ -27,18 +23,9 @@ public class Equipo implements Serializable {
     @NotBlank
     private String nombre;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<Jugador> jugadores;
-
     @ManyToOne
     @JoinColumn(name = "zona_id")
     private Zona zona;
-
-    @OneToMany(mappedBy = "local")
-    private List<Partido> partidosLocales;
-
-    @OneToMany(mappedBy = "visitante")
-    private List<Partido> partidosVisitantes;
 
     public Long getId() {
         return id;
@@ -56,14 +43,6 @@ public class Equipo implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-
     public Zona getZona() {
         return zona;
     }
@@ -72,19 +51,5 @@ public class Equipo implements Serializable {
         this.zona = zona;
     }
 
-    public List<Partido> getPartidosLocales() {
-        return partidosLocales;
-    }
-
-    public void setPartidosLocales(List<Partido> partidosLocales) {
-        this.partidosLocales = partidosLocales;
-    }
-
-    public List<Partido> getPartidosVisitantes() {
-        return partidosVisitantes;
-    }
-
-    public void setPartidosVisitantes(List<Partido> partidosVisitantes) {
-        this.partidosVisitantes = partidosVisitantes;
-    }
 }
+

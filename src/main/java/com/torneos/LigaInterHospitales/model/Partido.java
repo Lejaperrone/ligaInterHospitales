@@ -2,7 +2,6 @@ package com.torneos.LigaInterHospitales.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "Partido")
@@ -11,8 +10,7 @@ public class Partido implements Serializable {
     public Partido(){
     }
 
-    public Partido(List<JugadorPorPartido> jugadorPorPartidos, Equipo local, Equipo visitante, Fecha fecha, int golesLocal, int golesVisita) {
-        this.jugadorPorPartidos = jugadorPorPartidos;
+    public Partido(Equipo local, Equipo visitante, Fecha fecha, int golesLocal, int golesVisita) {
         this.local = local;
         this.visitante = visitante;
         this.fecha = fecha;
@@ -23,9 +21,6 @@ public class Partido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "partido")
-    private  List<JugadorPorPartido> jugadorPorPartidos;
 
     @ManyToOne()
     @JoinColumn(name = "local_id")
@@ -49,14 +44,6 @@ public class Partido implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<JugadorPorPartido> getJugadorPorPartidos() {
-        return jugadorPorPartidos;
-    }
-
-    public void setJugadorPorPartidos(List<JugadorPorPartido> jugadorPorPartidos) {
-        this.jugadorPorPartidos = jugadorPorPartidos;
     }
 
     public Equipo getLocal() {
