@@ -10,7 +10,5 @@ import java.util.List;
 
 @Repository
 public interface JugadorRepository extends JpaRepository<Jugador, Serializable> {
-
     List<Jugador> findAllByEquipo(Equipo equipo);
-
 }

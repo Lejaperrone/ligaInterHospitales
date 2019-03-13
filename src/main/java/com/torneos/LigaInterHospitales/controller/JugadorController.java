@@ -43,7 +43,7 @@ public class JugadorController {
         return modelMapper.map(jugador, JugadorDto.class);
     }
 
-    @GetMapping("/jugadores/{idEquipo}")
+    @GetMapping(value = "/jugadores/{idEquipo}")
     public List<JugadorDto> getJugadoresByEquipo(@PathVariable(value = "idEquipo" ) Long id) {
         Equipo equipo = equipoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Equipo", "Id", id));
         List<Jugador> jugadores = jugadorRepository.findAllByEquipo(equipo);
