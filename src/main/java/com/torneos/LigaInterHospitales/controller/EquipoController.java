@@ -42,7 +42,4 @@ public class EquipoController {
         List<Equipo> equipos = equipoRepository.findAllByZona(zona);
         return equipos.stream().map(equipo -> modelMapper.map(equipo,EquipoDto.class)).collect(Collectors.toList());
     }
-
-
-
 }
