@@ -57,7 +57,7 @@ public class PartidoController {
 
         partidoRepository.save(partido);
 
-        return partidoDto;
+        return modelMapper.map(partido, PartidoDto.class);
     }
 
     @PutMapping("/partido/{id}")

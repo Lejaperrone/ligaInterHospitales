@@ -57,7 +57,7 @@ public class JugadorController {
 
         jugadorRepository.save(jugador);
 
-        return jugadorDto;
+        return modelMapper.map(jugador, JugadorDto.class);
     }
 
     @PutMapping("/jugador/{id}")
