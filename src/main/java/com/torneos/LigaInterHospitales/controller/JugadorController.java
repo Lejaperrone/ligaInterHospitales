@@ -38,8 +38,8 @@ public class JugadorController {
 
     @GetMapping("/jugador/{id}")
     public JugadorDto getJugadorById(@PathVariable(value = "id") Long id) {
-        Jugador jugador = jugadorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Jugador", "Id", id));
 
+        Jugador jugador = jugadorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Jugador", "Id", id));
         return modelMapper.map(jugador, JugadorDto.class);
     }
 
