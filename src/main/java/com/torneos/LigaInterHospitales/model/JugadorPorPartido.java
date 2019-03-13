@@ -33,14 +33,19 @@ public class JugadorPorPartido implements Serializable {
     @JoinColumn(name = "partido_id")
     private Partido partido;
 
+    @Column(nullable = true)
     private int nroCamiseta;
 
+    @Column(columnDefinition = "int default 0")
     private int nroGoles;
 
+    @Column(columnDefinition = "boolean default false")
     private boolean amarilla;
 
+    @Column(columnDefinition = "boolean default false")
     private boolean roja;
 
+    @Column(columnDefinition = "boolean default false")
     private boolean figura;
 
     public Long getId() {
