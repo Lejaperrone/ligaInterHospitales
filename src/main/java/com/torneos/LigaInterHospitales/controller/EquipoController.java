@@ -1,11 +1,8 @@
 package com.torneos.LigaInterHospitales.controller;
 
 import com.torneos.LigaInterHospitales.dto.EquipoDto;
-import com.torneos.LigaInterHospitales.dto.JugadorDto;
-import com.torneos.LigaInterHospitales.dto.ZonaDto;
 import com.torneos.LigaInterHospitales.exception.ResourceNotFoundException;
 import com.torneos.LigaInterHospitales.model.Equipo;
-import com.torneos.LigaInterHospitales.model.Jugador;
 import com.torneos.LigaInterHospitales.model.Zona;
 import com.torneos.LigaInterHospitales.repository.EquipoRepository;
 import com.torneos.LigaInterHospitales.repository.ZonaRepository;
@@ -59,7 +56,7 @@ public class EquipoController {
 
         equipoRepository.save(equipo);
 
-        return equipoDto;
+        return modelMapper.map(equipo, EquipoDto.class);
     }
     @PutMapping("/equipo/{id}")
     public EquipoDto updateEquipo(@PathVariable(value = "id") Long id,@Valid @RequestBody EquipoDto equipoUpdate){
